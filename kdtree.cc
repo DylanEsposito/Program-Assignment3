@@ -56,10 +56,11 @@ void KDTree::destroy(KDNode *p)
 void KDTree::insert(double lat, double lon, const char *desc) 
 {
     // TODO
-    insert2(&p,lat,lon,desc);
+    int dimen = 1;
+    insert2(&p,lat,lon,desc,1);
 }
 
-void KDTree::insert2(KDNode *p, double lat2, double lon2, const char *desc)
+void KDTree::insert2(KDNode *p, double lat2, double lon2, const char *desc, int depth)
 {
     if (!p)
     {
@@ -68,22 +69,35 @@ void KDTree::insert2(KDNode *p, double lat2, double lon2, const char *desc)
     }
     else
     {
-        //if the lat2 is greater than, go rith
+        //NEED TO ORGANIZE AROUND CUTTING DIMENSION
+        //if(cuttingDim = 1)
+            //if((p)->lat < lat2)
+                //insert2(&((p)->right), lat, lon, desc, 2)
+            //else:
+                ////insert2(&((p)->right), lat, lon, desc, 2)
+        //elseif(cuttingDim = 2)
+            //if((p)->lon < lon2)
+                //insert2(&((p)->right), lat, lon, desc, 1)
+            //else:
+                 //insert2(&((p)->left), lat, lon, desc, 1)
+
+        //if the lat2 is greater than, go right
         if((p)->latitude < lat2)
             insert2(&((p)->right), lat, lon, desc); 
         //if the lat2 less than, go left
         if((p)->latitude > lat2)
-            insert(&((p)->left), lat, lon, desc);
-        //if the longitude is greater than lon2 we
+            insert2(&((p)->left), lat, lon, desc);
+        //if the lon2 is greater than we go right
         if((p)->longitude < lon2)
-            insert2(&((p)->right),lat,lon,desc);
+            insert2(&((p)->right), lat, lon, desc);
+        //if the lon2 is less than we go left
         if((p)->longitude > lon2)
-            insert(&((p)->left), lat, lon, desc);
-            
+            insert2(&((p)->left), lat, lon, desc);
     }
 }
 
-unsigned int KDTree::printNeighbors(double lat, double lon, double rad, const char *filter) {
+unsigned int KDTree::printNeighbors(double lat, double lon, double rad, const char *filter) 
+{
     // TODO
     return -1;
 }

@@ -10,7 +10,7 @@ class KDNode {
         KDNode *left;
         KDNode *right;
         // perhaps you want to include `depth` as well
-
+        double depth;
         // this function returs the distance in miles from lat, lon
         // to this object
         double distance(double lat, double lon);
@@ -36,7 +36,7 @@ class KDTree {
         unsigned int getSize();
         void insert(double lat, double lon, const char *desc);
         unsigned int printNeighbors(double lat, double lon, double rad, const char *filter);
-        void insert2(KDNode *p);
+        void insert2(KDNode *p,double lat, double lon, const char *desc, int depth);
 };
 
 #endif
